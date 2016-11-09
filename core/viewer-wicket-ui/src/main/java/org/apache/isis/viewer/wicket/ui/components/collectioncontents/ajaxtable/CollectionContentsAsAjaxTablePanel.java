@@ -174,18 +174,26 @@ public class CollectionContentsAsAjaxTablePanel
                     ? Where.PARENTED_TABLES
                     : Where.STANDALONE_TABLES;
         
-        final ObjectSpecification parentSpecIfAny = 
-                getModel().isParented() 
-                    ? getModel().getParentObjectAdapterMemento().getObjectAdapter(ConcurrencyChecking.NO_CHECK,
-                        getPersistenceSession(), getSpecificationLoader()).getSpecification()
-                    : null;
-        
         @SuppressWarnings("unchecked")
+        final Filter<ObjectAssociation> referencesParentFilter;
+        if (getModel().isParented()) {
+            final ObjectAdapter parentAdapter = getModel().getParentObjectAdapterMemento()
+                    .getObjectAdapter(ConcurrencyChecking.NO_CHECK,
+                            getPersistenceSession(), getSpecificationLoader());
+
+            final List<ObjectAdapter> collectionAdapters = getModel().getObject();
+
+            referencesParentFilter = associationDoesNotReferenceParent(parentAdapter, collectionAdapters);
+        }
+        else {
+            referencesParentFilter = Filters.any();
+        }
+
         final Filter<ObjectAssociation> filter = Filters.and(
-                ObjectAssociation.Filters.PROPERTIES, 
+                ObjectAssociation.Filters.PROPERTIES,
                 ObjectAssociation.Filters.staticallyVisible(whereContext),
-                associationDoesNotReferenceParent(parentSpecIfAny));
-        
+                referencesParentFilter);
+
         final List<? extends ObjectAssociation> propertyList = typeOfSpec.getAssociations(Contributed.INCLUDED, filter);
         final Map<String, ObjectAssociation> propertyById = Maps.newLinkedHashMap();
         for (final ObjectAssociation property : propertyList) {
@@ -231,10 +239,10 @@ public class CollectionContentsAsAjaxTablePanel
         }
     }
 
-    static Filter<ObjectAssociation> associationDoesNotReferenceParent(final ObjectSpecification parentSpec) {
-        if(parentSpec == null) {
-            return Filters.any();
-        }
+    static Filter<ObjectAssociation> associationDoesNotReferenceParent(
+            final ObjectAdapter parentAdapter,
+            final List<ObjectAdapter> elementAdapters) {
+
         return new Filter<ObjectAssociation>() {
             @Override
             public boolean accept(ObjectAssociation association) {
@@ -242,13 +250,22 @@ public class CollectionContentsAsAjaxTablePanel
                 if(facet == null) {
                     return true;
                 }
-                if (facet.where() != Where.REFERENCES_PARENT) {
+                if(allElementsInCollectionReference(association, parentAdapter, elementAdapters)) {
                     return true;
                 }
-                final ObjectSpecification assocSpec = association.getSpecification();
-                final boolean associationSpecIsOfParentSpec = parentSpec.isOfType(assocSpec);
-                final boolean isVisible = !associationSpecIsOfParentSpec;
-                return isVisible;
+                return false;
+            }
+
+            private boolean allElementsInCollectionReference(
+                    final ObjectAssociation association,
+                    final ObjectAdapter parentAdapter, final List<ObjectAdapter> elementAdapters) {
+                for (ObjectAdapter collectionAdapter : elementAdapters) {
+                    final ObjectAdapter objectAdapter = association.get(collectionAdapter);
+                    if(objectAdapter != parentAdapter) {
+                        return false;
+                    }
+                }
+                return true;
             }
         };
     }
