@@ -29,7 +29,31 @@ $(function() {
             OPEN_IN_NEW_TAB: 'openInNewTab',
             FOCUS_FIRST_ACTION_PARAMETER: 'focusFirstActionParameter'
         },
-        copyModalShown: false
+        copyModalShown: false,
+
+        updateAddressBar: function (paramName, newValue) {
+            if (window.history) {
+                var queryString = document.location.search || "";
+                var idxOfParamName = queryString.indexOf('?'+paramName+'=');
+                if (idxOfParamName < 0) {
+                    idxOfParamName = queryString.indexOf('&'+paramName+'=');
+                }
+
+                if (idxOfParamName > -1) {
+                    var idxOfNextParam = queryString.indexOf('&', idxOfParamName + 1);
+                    var prefix = queryString.substring(0, idxOfParamName);
+                    var suffix = '';
+                    if (idxOfNextParam > -1) {
+                        suffix = queryString.substr(idxOfNextParam, queryString.length);
+                    }
+                    var newQueryString = prefix + '&' + paramName + '=' + newValue + suffix;
+                    window.history.replaceState({}, null, document.location.pathname + newQueryString);
+                } else {
+                    var newQueryString = queryString + '&' + paramName + '=' + newValue;
+                    window.history.replaceState({}, null, document.location.pathname + newQueryString);
+                }
+            }
+        }
     };
 
     /**

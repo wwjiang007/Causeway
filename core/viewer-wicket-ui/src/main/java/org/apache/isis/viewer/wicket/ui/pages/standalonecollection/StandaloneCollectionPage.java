@@ -19,8 +19,11 @@
 
 package org.apache.isis.viewer.wicket.ui.pages.standalonecollection;
 
+import org.apache.wicket.Application;
 import org.apache.wicket.Component;
+import org.apache.wicket.RestartResponseException;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import org.apache.isis.viewer.wicket.model.common.PageParametersUtils;
 import org.apache.isis.viewer.wicket.model.models.ActionModel;
@@ -36,14 +39,26 @@ public class StandaloneCollectionPage extends PageAbstract {
 
     private static final long serialVersionUID = 1L;
 
+    public StandaloneCollectionPage() {
+        super(new PageParameters(), "neverRendered");
+        throw new RestartResponseException(Application.get().getHomePage());
+    }
+
     /**
-     * For use with {@link Component#setResponsePage(org.apache.wicket.Page)}
+     * For use with {@link Component#setResponsePage(org.apache.wicket.request.component.IRequestablePage)}
      */
     public StandaloneCollectionPage(final EntityCollectionModel model) {
-        super(PageParametersUtils.newPageParameters(), actionNameFrom(model), ComponentType.STANDALONE_COLLECTION);
+        super(newPageParameters(model), actionNameFrom(model), ComponentType.STANDALONE_COLLECTION);
         addChildComponents(themeDiv, model);
 
         addBookmarkedPages(themeDiv);
+    }
+
+    private static PageParameters newPageParameters(EntityCollectionModel model) {
+        final PageParameters pageParameters = PageParametersUtils.newPageParameters();
+        final String simpleName = model.getTypeOfSpecification().getCorrespondingClass().getSimpleName();
+        pageParameters.set("className", simpleName);
+        return pageParameters;
     }
 
     private static String actionNameFrom(final EntityCollectionModel model) {

@@ -195,8 +195,10 @@ public class IsisAjaxFallbackDataTable<T, S> extends DataTable<T, S> {
         final UiHintContainer uiHintContainer = getUiHintContainer();
         if(uiHintContainer == null) {
             return;
-        } 
-        uiHintContainer.setHint(this, IsisAjaxFallbackDataTable.UIHINT_PAGE_NUMBER, ""+getCurrentPage());
+        }
+        final String currentPage = "" + getCurrentPage();
+        uiHintContainer.setHint(this, UIHINT_PAGE_NUMBER, currentPage);
+        target.appendJavaScript(String.format("Isis.updateAddressBar('%s', '%s')", UIHINT_PAGE_NUMBER, currentPage));
     }
 
     public void setSortOrderHintAndBroadcast(SortOrder order, String property, AjaxRequestTarget target) {
@@ -211,10 +213,12 @@ public class IsisAjaxFallbackDataTable<T, S> extends DataTable<T, S> {
         }
         // .. then set this one
         uiHintContainer.setHint(this, order.name(), property);
+        target.appendJavaScript(String.format("Isis.updateAddressBar('%s', '%s')", "sortDirection", order.name()));
+        target.appendJavaScript(String.format("Isis.updateAddressBar('%s', '%s')", "sortColumn", property));
     }
 
     private UiHintContainer getUiHintContainer() {
-        return UiHintContainer.Util.hintContainerOf(this, EntityModel.class);
+        return UiHintContainer.Util.hintContainerOf(this);
     }
 
 }

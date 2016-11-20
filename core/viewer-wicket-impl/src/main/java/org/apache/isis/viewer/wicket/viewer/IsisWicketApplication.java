@@ -647,6 +647,7 @@ public class IsisWicketApplication
         mountPage("/password/reset", PageType.PASSWORD_RESET);
 
         mountPage("/entity/#{objectOid}", PageType.ENTITY);
+        mountPage("/collection/standalone/#{className}", PageType.STANDALONE_COLLECTION);
 
         // nb: action mount cannot contain {actionArgs}, because the default
         // parameters encoder doesn't seem to be able to handle multiple args

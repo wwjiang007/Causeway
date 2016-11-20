@@ -65,7 +65,6 @@ public abstract class IsisBlobOrClobPanelAbstract<T extends NamedWithMimeType> e
     @SuppressWarnings("unused")
     private static final Logger LOG = LoggerFactory.getLogger(IsisBlobOrClobPanelAbstract.class);
     
-    private static final String ID_SCALAR_IF_REGULAR = "scalarIfRegular";
     private static final String ID_SCALAR_IF_REGULAR_DOWNLOAD = "scalarIfRegularDownload";
     private static final String ID_FILE_NAME = "fileName";
     private static final String ID_SCALAR_IF_REGULAR_CLEAR = "scalarIfRegularClear";

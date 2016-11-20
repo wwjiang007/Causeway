@@ -29,7 +29,7 @@ public interface UiHintContainer {
 
     void clearHint(Component component, String attributeName);
 
-    public static class Util {
+    class Util {
         private Util(){}
 
         public static UiHintContainer hintContainerOf(Component component) {
