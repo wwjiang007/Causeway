@@ -212,14 +212,16 @@ public interface ObjectAction extends ObjectMember {
         private Util() {
         }
 
-        public static String nameFor(final ObjectAction objAction) {
+        public static String nameFor(
+                final ObjectAction objAction,
+                final ObjectAdapter owningAdapter) {
             final String actionName = objAction.getName();
             if (actionName != null) {
                 return actionName;
             }
             final NamedFacet namedFacet = objAction.getFacet(NamedFacet.class);
             if (namedFacet != null) {
-                return namedFacet.value();
+                return namedFacet.value(owningAdapter);
             }
             return "(no name)";
         }

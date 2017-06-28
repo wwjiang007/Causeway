@@ -103,7 +103,7 @@ public class ObjectActionParameterAbstractTest_getId_and_getName {
     public void setUp() throws Exception {
         context.checking(new Expectations() {
             {
-                allowing(stubSpecForString).getSingularName();
+                allowing(stubSpecForString).getSingularName(owningAdapter);
                 will(returnValue("string"));
 
                 allowing(stubObjectActionParameterString).getSpecification();
@@ -126,7 +126,7 @@ public class ObjectActionParameterAbstractTest_getId_and_getName {
                 one(actionParamPeer).getFacet(NamedFacet.class);
                 will(returnValue(namedFacet));
 
-                atLeast(1).of(namedFacet).value();
+                atLeast(1).of(namedFacet).value(owningAdapter);
                 will(returnValue("Some parameter name"));
             }
         });
@@ -144,7 +144,7 @@ public class ObjectActionParameterAbstractTest_getId_and_getName {
                 one(actionParamPeer).getFacet(NamedFacet.class);
                 will(returnValue(namedFacet));
 
-                atLeast(1).of(namedFacet).value();
+                atLeast(1).of(namedFacet).value(owningAdapter);
                 will(returnValue("Some parameter name"));
             }
         });

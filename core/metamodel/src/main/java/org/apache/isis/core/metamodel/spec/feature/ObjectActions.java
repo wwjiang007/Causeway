@@ -30,13 +30,6 @@ public final class ObjectActions {
     private ObjectActions() {
     }
 
-    /**
-     * @deprecated - use {@link ObjectAction.Util#nameFor(ObjectAction)}
-     */
-    @Deprecated
-    public static String nameFor(final ObjectAction action) {
-        return ObjectAction.Util.nameFor(action);
-    }
 
     /**
      * @deprecated - use {@link ObjectAction.Filters#memberOrderOf(ObjectAssociation)}

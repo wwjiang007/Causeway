@@ -147,7 +147,7 @@ public class DomainTypeReprRenderer extends ReprRendererAbstract<DomainTypeReprR
     }
 
     protected void putExtensionsNames() {
-        final String singularName = objectSpecification.getSingularName();
+        final String singularName = objectSpecification.getSingularName(owningAdapter);
         getExtensions().mapPut("friendlyName", singularName);
 
         final String pluralName = objectSpecification.getPluralName();

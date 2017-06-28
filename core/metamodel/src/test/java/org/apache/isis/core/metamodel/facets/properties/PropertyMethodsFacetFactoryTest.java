@@ -764,7 +764,7 @@ public class PropertyMethodsFacetFactoryTest extends AbstractFacetFactoryTest {
         assertNotNull(facet);
         assertTrue(facet instanceof NamedFacetStaticMethod);
         final NamedFacetStaticMethod namedFacet = (NamedFacetStaticMethod) facet;
-        assertEquals("Given name", namedFacet.value());
+        assertEquals("Given name", namedFacet.value(owningAdapter));
 
         assertTrue(methodRemover.getRemovedMethodMethodCalls().contains(nameMethod));
     }

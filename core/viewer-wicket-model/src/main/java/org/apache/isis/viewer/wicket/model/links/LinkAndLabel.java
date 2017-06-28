@@ -52,7 +52,7 @@ public class LinkAndLabel implements Serializable {
             final String disabledReasonIfAny,
             final boolean blobOrClob) {
 
-        final String name = ObjectAction.Util.nameFor(objectAction);
+        final String name = ObjectAction.Util.nameFor(objectAction, owningAdapter);
 
         final boolean explorationOrPrototype = objectAction.isPrototype();
         final String actionIdentifier = ObjectAction.Util.actionIdentifierFor(objectAction);

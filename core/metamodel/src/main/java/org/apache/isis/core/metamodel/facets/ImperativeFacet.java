@@ -86,7 +86,7 @@ public interface ImperativeFacet extends Facet {
         MODIFY_COLLECTION_ADD,
         MODIFY_COLLECTION_REMOVE,
         CHOICES_OR_AUTOCOMPLETE,
-        DEFAULTS, 
+        DEFAULTS,
         INITIALIZATION,
         LIFECYCLE, 
         UI_HINT

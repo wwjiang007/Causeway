@@ -53,7 +53,6 @@ import org.apache.isis.applib.services.xmlsnapshot.XmlSnapshotService.Snapshot;
 import org.apache.isis.applib.snapshot.SnapshottableWithInclusions;
 import org.apache.isis.core.commons.exceptions.IsisException;
 import org.apache.isis.core.metamodel.adapter.ObjectAdapter;
-import org.apache.isis.core.metamodel.adapter.oid.OidMarshaller;
 import org.apache.isis.core.metamodel.consent.InteractionInitiatedBy;
 import org.apache.isis.core.metamodel.facetapi.FacetUtil;
 import org.apache.isis.core.metamodel.facets.collections.modify.CollectionFacet;
@@ -612,7 +611,8 @@ public class XmlSnapshot implements Snapshot {
         if (LOG.isDebugEnabled()) {
             LOG.debug("objectToElement(NO): create element and isis:title");
         }
-        final Element element = schema.createElement(getXmlDocument(), nos.getShortIdentifier(), nos.getFullIdentifier(), nos.getSingularName(), nos.getPluralName());
+        final Element element = schema.createElement(getXmlDocument(), nos.getShortIdentifier(), nos.getFullIdentifier(), nos.getSingularName(
+                owningAdapter), nos.getPluralName());
         isisMetaModel.appendIsisTitle(element, adapter.titleString());
 
         if (LOG.isDebugEnabled()) {

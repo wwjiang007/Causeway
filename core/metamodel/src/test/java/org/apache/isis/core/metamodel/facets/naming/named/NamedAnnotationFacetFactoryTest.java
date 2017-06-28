@@ -59,7 +59,7 @@ public class NamedAnnotationFacetFactoryTest extends AbstractFacetFactoryJUnit4T
         assertThat(facet, is(not(nullValue())));
         assertThat(facet instanceof NamedFacetAbstract, is(true));
         final NamedFacetAbstract namedFacetAbstract = (NamedFacetAbstract) facet;
-        assertThat(namedFacetAbstract.value(), equalTo("some name"));
+        assertThat(namedFacetAbstract.value(owningAdapter), equalTo("some name"));
     }
 
     @Test
@@ -84,7 +84,7 @@ public class NamedAnnotationFacetFactoryTest extends AbstractFacetFactoryJUnit4T
         assertThat(facet, is(not(nullValue())));
         assertThat(facet instanceof NamedFacetAbstract, is(true));
         final NamedFacetAbstract namedFacetAbstract = (NamedFacetAbstract) facet;
-        assertThat(namedFacetAbstract.value(), equalTo("some name"));
+        assertThat(namedFacetAbstract.value(owningAdapter), equalTo("some name"));
     }
 
     public void testNamedAnnotationPickedUpOnCollection() {
@@ -107,7 +107,7 @@ public class NamedAnnotationFacetFactoryTest extends AbstractFacetFactoryJUnit4T
         assertThat(facet, is(not(nullValue())));
         assertThat(facet instanceof NamedFacetAbstract, is(true));
         final NamedFacetAbstract namedFacetAbstract = (NamedFacetAbstract) facet;
-        assertThat(namedFacetAbstract.value(), equalTo("some name"));
+        assertThat(namedFacetAbstract.value(owningAdapter), equalTo("some name"));
     }
 
     public void testNamedAnnotationPickedUpOnAction() {
@@ -129,7 +129,7 @@ public class NamedAnnotationFacetFactoryTest extends AbstractFacetFactoryJUnit4T
         assertThat(facet, is(not(nullValue())));
         assertThat(facet instanceof NamedFacetAbstract, is(true));
         final NamedFacetAbstract namedFacetAbstract = (NamedFacetAbstract) facet;
-        assertThat(namedFacetAbstract.value(), equalTo("some name"));
+        assertThat(namedFacetAbstract.value(owningAdapter), equalTo("some name"));
     }
 
     public void testNamedAnnotationPickedUpOnActionParameter() {
@@ -151,7 +151,7 @@ public class NamedAnnotationFacetFactoryTest extends AbstractFacetFactoryJUnit4T
         assertThat(facet, is(not(nullValue())));
         assertThat(facet instanceof NamedFacetAbstract, is(true));
         final NamedFacetAbstract namedFacetAbstract = (NamedFacetAbstract) facet;
-        assertThat(namedFacetAbstract.value(), equalTo("some name"));
+        assertThat(namedFacetAbstract.value(owningAdapter), equalTo("some name"));
     }
 
 }

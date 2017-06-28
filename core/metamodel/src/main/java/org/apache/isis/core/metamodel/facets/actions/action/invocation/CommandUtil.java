@@ -34,15 +34,9 @@ import org.apache.isis.core.metamodel.adapter.ObjectAdapter;
 import org.apache.isis.core.metamodel.adapter.mgr.AdapterManager;
 import org.apache.isis.core.metamodel.adapter.oid.Oid;
 import org.apache.isis.core.metamodel.adapter.oid.RootOid;
-import org.apache.isis.core.metamodel.facetapi.FacetUtil;
-import org.apache.isis.core.metamodel.facets.all.named.NamedFacet;
-import org.apache.isis.core.metamodel.facets.all.named.NamedFacetInferred;
-import org.apache.isis.core.metamodel.spec.ObjectSpecification;
 import org.apache.isis.core.metamodel.spec.feature.ObjectAction;
 import org.apache.isis.core.metamodel.spec.feature.ObjectActionParameter;
 import org.apache.isis.core.metamodel.spec.feature.ObjectMember;
-import org.apache.isis.core.metamodel.specloader.specimpl.MixedInMember2;
-import org.apache.isis.core.metamodel.specloader.specimpl.ObjectActionDefault;
 
 /**
  * Factoring out the commonality between <tt>ActionInvocationFacetViaMethod</tt> and <tt>BackgroundServiceDefault</tt>.
@@ -56,7 +50,7 @@ public class CommandUtil {
     }
 
     public static String targetClassNameFor(final ObjectAdapter targetAdapter) {
-        return StringExtensions.asNaturalName2(targetAdapter.getSpecification().getSingularName());
+        return StringExtensions.asNaturalName2(targetAdapter.getSpecification().getSingularName(owningAdapter));
     }
 
     public static String memberIdentifierFor(final ObjectMember objectMember) {

@@ -131,7 +131,7 @@ public class EntityIconAndTitlePanel extends PanelAbstract<ObjectAdapterModel> {
 
             link.addOrReplace(this.label = newLabel(ID_ENTITY_TITLE, titleAbbreviated(title)));
 
-            String entityTypeName = adapterIfAny.getSpecification().getSingularName();
+            String entityTypeName = adapterIfAny.getSpecification().getSingularName(owningAdapter);
             link.add(new AttributeModifier("title", entityTypeName + ": " + title));
         }
 

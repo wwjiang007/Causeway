@@ -23,7 +23,6 @@ import com.google.common.base.Function;
 import org.apache.isis.applib.Identifier;
 import org.apache.isis.core.metamodel.facetapi.FeatureType;
 import org.apache.isis.core.metamodel.facetapi.IdentifiedHolder;
-import org.apache.isis.core.metamodel.facets.all.named.NamedFacet;
 
 public class FacetedMethodParameter extends TypedHolderDefault implements IdentifiedHolder {
 
@@ -47,12 +46,6 @@ public class FacetedMethodParameter extends TypedHolderDefault implements Identi
 
 
     public static class Functions {
-        public static final Function<FacetedMethodParameter, String> GET_NAME = new Function<FacetedMethodParameter, String>() {
-            @Override public String apply(final FacetedMethodParameter input) {
-                final NamedFacet namedFacet = input.getFacet(NamedFacet.class);
-                return namedFacet.value();
-            }
-        };
         public static final Function<FacetedMethodParameter, Class<?>> GET_TYPE = new Function<FacetedMethodParameter, Class<?>>() {
             @Override public Class<?> apply(final FacetedMethodParameter input) {
                 return input.getType();

@@ -570,7 +570,7 @@ public abstract class GridSystemServiceAbstract<G extends Grid> implements GridS
             final FacetHolder facetHolder) {
         final NamedFacet namedFacet = facetHolder.getFacet(NamedFacet.class);
         if(isDoOp(namedFacet)) {
-            final String named = namedFacet.value();
+            final String named = namedFacet.value(owningAdapter);
             if(!Strings.isNullOrEmpty(named)){
                 hasNamed.setNamed(named);
             }

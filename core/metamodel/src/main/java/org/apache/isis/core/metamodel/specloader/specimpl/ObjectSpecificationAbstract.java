@@ -397,7 +397,7 @@ public abstract class ObjectSpecificationAbstract extends FacetHolderImpl implem
                 return titleString;
             }
         }
-        return (this.isService() ? "" : "Untitled ") + getSingularName();
+        return (this.isService() ? "" : "Untitled ") + getSingularName(targetAdapter);
     }
 
 
@@ -464,11 +464,12 @@ public abstract class ObjectSpecificationAbstract extends FacetHolderImpl implem
     /**
      * The name according to any available {@link org.apache.isis.core.metamodel.facets.all.named.NamedFacet},
      * but falling back to {@link #getFullIdentifier()} otherwise.
+     * @param owningAdapter
      */
     @Override
-    public String getSingularName() {
+    public String getSingularName(final ObjectAdapter owningAdapter) {
         final NamedFacet namedFacet = getFacet(NamedFacet.class);
-        return namedFacet != null? namedFacet.value() : this.getFullIdentifier();
+        return namedFacet != null? namedFacet.value(owningAdapter) : this.getFullIdentifier();
     }
 
     /**
@@ -683,7 +684,7 @@ public abstract class ObjectSpecificationAbstract extends FacetHolderImpl implem
             }
         }
         throw new ObjectSpecificationException(
-                String.format("No association called '%s' in '%s'", id, getSingularName()));
+                String.format("No association called '%s' in '%s'", id, getSingularName(owningAdapter)));
     }
 
     private ObjectAssociation getAssociationWithId(final String id) {

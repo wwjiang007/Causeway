@@ -20,7 +20,6 @@
 package org.apache.isis.core.metamodel.facets.actions;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -173,7 +172,7 @@ public class ActionMethodsFacetFactoryTest extends AbstractFacetFactoryTest {
         assertNotNull(facet);
         assertTrue(facet instanceof NamedFacet);
         final NamedFacet namedFacet = (NamedFacet) facet;
-        assertEquals("An Action With Named Annotation", namedFacet.value());
+        assertEquals("An Action With Named Annotation", namedFacet.value(owningAdapter));
     }
 
 
@@ -201,7 +200,7 @@ public class ActionMethodsFacetFactoryTest extends AbstractFacetFactoryTest {
         assertNotNull(facet);
         assertTrue(facet instanceof NamedFacet);
         final NamedFacet namedFacet = (NamedFacet) facet;
-        assertEquals("An Action With Exploration Prefix", namedFacet.value());
+        assertEquals("An Action With Exploration Prefix", namedFacet.value(owningAdapter));
     }
 
     public void testInstallsValidateMethodNoArgsFacetAndRemovesMethod() {
@@ -440,7 +439,7 @@ public class ActionMethodsFacetFactoryTest extends AbstractFacetFactoryTest {
         assertNotNull(facet);
         assertTrue(facet instanceof NamedFacetAbstract);
         final NamedFacetAbstract namedFacetAbstract = (NamedFacetAbstract) facet;
-        assertEquals("Another Name", namedFacetAbstract.value());
+        assertEquals("Another Name", namedFacetAbstract.value(owningAdapter));
 
         assertTrue(methodRemover.getRemovedMethodMethodCalls().contains(nameMethod));
     }

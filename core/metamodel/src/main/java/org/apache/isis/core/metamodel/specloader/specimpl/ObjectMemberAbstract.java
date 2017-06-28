@@ -187,7 +187,7 @@ public abstract class ObjectMemberAbstract implements ObjectMember {
     @Override
     public String getName() {
         final NamedFacet facet = getFacet(NamedFacet.class);
-        final String name = facet.value();
+        final String name = facet.value(owningAdapter);
         if (name != null) {
             return name;
         }
@@ -348,7 +348,7 @@ public abstract class ObjectMemberAbstract implements ObjectMember {
     }
 
     static String suffix(final ObjectAction mixinAction) {
-        return suffix(mixinAction.getOnType().getSingularName());
+        return suffix(mixinAction.getOnType().getSingularName(owningAdapter));
     }
 
     static String suffix(final String singularName) {

@@ -198,7 +198,7 @@ public class ObjectSpecificationDefault extends ObjectSpecificationAbstract impl
                 final NamedFacetTranslated facet = (NamedFacetTranslated) namedFacet;
                 pluralFacet = new PluralFacetTranslated(facet, this);
             } else {
-                pluralFacet = new PluralFacetInferred(StringExtensions.asPluralName(namedFacet.value()), this);
+                pluralFacet = new PluralFacetInferred(StringExtensions.asPluralName(namedFacet.value(owningAdapter)), this);
             }
             addFacet(pluralFacet);
         }

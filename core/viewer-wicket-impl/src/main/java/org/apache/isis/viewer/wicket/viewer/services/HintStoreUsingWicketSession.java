@@ -18,6 +18,7 @@
  */
 package org.apache.isis.viewer.wicket.viewer.services;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -45,6 +46,9 @@ public class HintStoreUsingWicketSession implements HintStore {
 
     @Override
     public String get(final Bookmark bookmark, final String key) {
+        if(bookmark == null) {
+            return null;
+        }
         final Map<String, String> hintsForBookmark = hintsFor(bookmark);
         final String value = hintsForBookmark.get(key);
 
@@ -57,6 +61,9 @@ public class HintStoreUsingWicketSession implements HintStore {
 
     @Override
     public void set(final Bookmark bookmark, final String key, final String value) {
+        if(bookmark == null) {
+            return;
+        }
         final Map<String, String> hintsForBookmark = hintsFor(bookmark);
 
         if(LOG.isDebugEnabled()) {
@@ -68,6 +75,9 @@ public class HintStoreUsingWicketSession implements HintStore {
 
     @Override
     public void remove(final Bookmark bookmark, final String key) {
+        if(bookmark == null) {
+            return;
+        }
         final Map<String, String> hintsForBookmark = hintsFor(bookmark);
 
         if(LOG.isDebugEnabled()) {
@@ -79,18 +89,27 @@ public class HintStoreUsingWicketSession implements HintStore {
 
     @Override
     public Set<String> findHintKeys(final Bookmark bookmark) {
+        if(bookmark == null) {
+            return Collections.emptySet();
+        }
         final Map<String, String> hintsForBookmark = hintsFor(bookmark);
         return hintsForBookmark.keySet();
     }
 
     @Override
     public void removeAll(final Bookmark bookmark) {
+        if(bookmark == null) {
+            return;
+        }
         final String sessionAttribute = sessionAttributeFor(bookmark);
         Session.get().removeAttribute(sessionAttribute);
     }
 
 
     protected Map<String, String> hintsFor(final Bookmark bookmark) {
+        if(bookmark == null) {
+            return Maps.newLinkedHashMap();
+        }
         final String sessionAttribute = sessionAttributeFor(bookmark);
         LinkedHashMap<String, String> hints =
                 (LinkedHashMap<String, String>) Session.get().getAttribute(sessionAttribute);

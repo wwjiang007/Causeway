@@ -19,6 +19,7 @@
 
 package org.apache.isis.core.metamodel.facets.all.named;
 
+import org.apache.isis.core.metamodel.adapter.ObjectAdapter;
 import org.apache.isis.core.metamodel.facetapi.Facet;
 import org.apache.isis.core.metamodel.facetapi.FacetHolder;
 import org.apache.isis.core.metamodel.facets.MultipleValueFacetAbstract;
@@ -40,7 +41,7 @@ public abstract class NamedFacetAbstract extends MultipleValueFacetAbstract impl
     }
 
     @Override
-    public String value() {
+    public String value(final ObjectAdapter owningAdapter) {
         return value;
     }
 

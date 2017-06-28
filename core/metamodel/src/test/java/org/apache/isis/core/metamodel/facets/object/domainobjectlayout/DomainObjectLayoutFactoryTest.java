@@ -19,7 +19,6 @@
 
 package org.apache.isis.core.metamodel.facets.object.domainobjectlayout;
 
-import org.jmock.Expectations;
 import org.jmock.auto.Mock;
 import org.junit.After;
 import org.junit.Assert;
@@ -441,7 +440,7 @@ public class DomainObjectLayoutFactoryTest extends AbstractFacetFactoryJUnit4Tes
                 assertTrue(facet instanceof NamedFacetForDomainObjectLayoutAnnotation);
 
                 final NamedFacetForDomainObjectLayoutAnnotation facetImpl = (NamedFacetForDomainObjectLayoutAnnotation) facet;
-                Assert.assertThat(facetImpl.value(), is("Name override"));
+                Assert.assertThat(facetImpl.value(owningAdapter), is("Name override"));
 
                 expectNoMethodsRemoved();
             }
@@ -474,7 +473,7 @@ public class DomainObjectLayoutFactoryTest extends AbstractFacetFactoryJUnit4Tes
                 assertTrue(facet instanceof NamedFacetForViewModelLayoutAnnotation);
 
                 final NamedFacetForViewModelLayoutAnnotation facetImpl = (NamedFacetForViewModelLayoutAnnotation) facet;
-                Assert.assertThat(facetImpl.value(), is("Name override"));
+                Assert.assertThat(facetImpl.value(owningAdapter), is("Name override"));
 
                 expectNoMethodsRemoved();
             }

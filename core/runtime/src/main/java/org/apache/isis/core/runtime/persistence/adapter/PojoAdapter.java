@@ -335,7 +335,7 @@ public class PojoAdapter extends InstanceAbstract implements ObjectAdapter {
             case 0:
                 return "No " + elementSpecification.getPluralName();
             case 1:
-                return "1 " + elementSpecification.getSingularName();
+                return "1 " + elementSpecification.getSingularName(owningAdapter);
             default:
                 return size + " " + elementSpecification.getPluralName();
             }
@@ -357,7 +357,7 @@ public class PojoAdapter extends InstanceAbstract implements ObjectAdapter {
     }
 
     protected String getDefaultTitle() {
-        return "A" + (" " + getSpecification().getSingularName()).toLowerCase();
+        return "A" + (" " + getSpecification().getSingularName(owningAdapter)).toLowerCase();
     }
 
     protected void toString(final ToString str) {

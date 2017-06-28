@@ -62,7 +62,7 @@ public class NamedFacetForPropertyLayoutAnnotationFactoryTest extends AbstractFa
         final NamedFacet facet = facetedMethod.getFacet(NamedFacet.class);
         assertThat(facet, is(notNullValue()));
         assertThat(facet, is(instanceOf(NamedFacetForPropertyLayoutAnnotation.class)));
-        assertThat(facet.value(), is(equalTo("1st name")));
+        assertThat(facet.value(owningAdapter), is(equalTo("1st name")));
         assertThat(facet.escaped(), is(true));
     }
 
@@ -92,7 +92,7 @@ public class NamedFacetForPropertyLayoutAnnotationFactoryTest extends AbstractFa
         final NamedFacet facet = facetedMethod.getFacet(NamedFacet.class);
         assertThat(facet, is(notNullValue()));
         assertThat(facet, is(instanceOf(NamedFacetForPropertyLayoutAnnotation.class)));
-        assertThat(facet.value(), is(equalTo("1st name")));
+        assertThat(facet.value(owningAdapter), is(equalTo("1st name")));
         assertThat(facet.escaped(), is(false));
     }
 

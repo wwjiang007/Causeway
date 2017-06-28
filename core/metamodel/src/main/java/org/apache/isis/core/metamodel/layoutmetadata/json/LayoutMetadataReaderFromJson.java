@@ -542,7 +542,7 @@ public class LayoutMetadataReaderFromJson implements LayoutMetadataReader2, Serv
         final NamedFacet namedFacet = action.getFacet(NamedFacet.class);
         if(namedFacet != null && !namedFacet.isNoop()) {
             final NamedFacetRepr namedFacetRepr = new NamedFacetRepr();
-            namedFacetRepr.value = namedFacet.value();
+            namedFacetRepr.value = namedFacet.value(owningAdapter);
             actionRepr.named = namedFacetRepr;
         }
         
@@ -582,7 +582,7 @@ public class LayoutMetadataReaderFromJson implements LayoutMetadataReader2, Serv
         final NamedFacet namedFacet = assoc.getFacet(NamedFacet.class);
         if(namedFacet != null && !namedFacet.isNoop()) {
             final NamedFacetRepr namedFacetRepr = new NamedFacetRepr();
-            namedFacetRepr.value = namedFacet.value();
+            namedFacetRepr.value = namedFacet.value(owningAdapter);
             memberRepr.named = namedFacetRepr;
         }
         final DisabledFacet disabledFacet = assoc.getFacet(DisabledFacet.class);

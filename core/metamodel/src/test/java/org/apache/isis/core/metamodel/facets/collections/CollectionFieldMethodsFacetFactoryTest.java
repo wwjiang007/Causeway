@@ -675,7 +675,7 @@ public class CollectionFieldMethodsFacetFactoryTest extends AbstractFacetFactory
         assertNotNull(facet);
         assertTrue(facet instanceof NamedFacetStaticMethod);
         final NamedFacetStaticMethod namedFacet = (NamedFacetStaticMethod) facet;
-        assertEquals("Most Recent Orders", namedFacet.value());
+        assertEquals("Most Recent Orders", namedFacet.value(owningAdapter));
 
         assertTrue(methodRemover.getRemovedMethodMethodCalls().contains(nameMethod));
     }

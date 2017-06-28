@@ -225,13 +225,13 @@ public class ObjectSpecificationStub extends FacetHolderImpl implements ObjectSp
     }
 
     @Override
-    public String getSingularName() {
+    public String getSingularName(final ObjectAdapter owningAdapter) {
         return name + " (singular)";
     }
 
     @Override
     public String getDescription() {
-        return getSingularName();
+        return getSingularName(owningAdapter);
     }
 
     @Override

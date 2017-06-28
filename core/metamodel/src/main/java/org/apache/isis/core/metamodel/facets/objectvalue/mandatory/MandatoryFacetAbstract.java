@@ -91,7 +91,7 @@ public abstract class MandatoryFacetAbstract extends MarkerFacetAbstract impleme
             return null;
         }
         final NamedFacet namedFacet = getFacetHolder().getFacet(NamedFacet.class);
-        final String name = namedFacet != null? namedFacet.value(): null;
+        final String name = namedFacet != null? namedFacet.value(owningAdapter): null;
         return name != null? "'" + name + "' is mandatory":"Mandatory";
     }
 }

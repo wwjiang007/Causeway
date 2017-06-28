@@ -126,10 +126,11 @@ public interface ObjectSpecification extends Specification, ObjectActionContaine
      * Returns the (singular) name for objects of this specification.
      * 
      * <p>
-     * Corresponds to the {@link NamedFacet#value()} of {@link NamedFacet}; is
+     * Corresponds to the {@link NamedFacet#value(ObjectAdapter)} of {@link NamedFacet}; is
      * not necessarily immutable.
+     * @param owningAdapter
      */
-    String getSingularName();
+    String getSingularName(final ObjectAdapter owningAdapter);
 
     /**
      * Returns the plural name for objects of this specification.

@@ -86,7 +86,7 @@ public class TranslationFacetFactory extends FacetFactoryAbstract implements Con
             // not expected...
             return;
         }
-        final String originalText = facet.value();
+        final String originalText = facet.value(owningAdapter);
         if (isNullOrEmptyWhenTrimmed(originalText)) {
             // not expected...
             return;

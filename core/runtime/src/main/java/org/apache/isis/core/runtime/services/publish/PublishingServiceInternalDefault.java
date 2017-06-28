@@ -63,6 +63,7 @@ import org.apache.isis.core.metamodel.facets.FacetedMethod;
 import org.apache.isis.core.metamodel.facets.FacetedMethodParameter;
 import org.apache.isis.core.metamodel.facets.actions.action.invocation.CommandUtil;
 import org.apache.isis.core.metamodel.facets.actions.publish.PublishedActionFacet;
+import org.apache.isis.core.metamodel.facets.all.named.NamedFacet;
 import org.apache.isis.core.metamodel.facets.object.encodeable.EncodableFacet;
 import org.apache.isis.core.metamodel.facets.object.publishedobject.PublishedObjectFacet;
 import org.apache.isis.core.metamodel.services.ixn.InteractionDtoServiceInternal;
@@ -274,7 +275,12 @@ public class PublishingServiceInternalDefault implements PublishingServiceIntern
             returnType = facetedMethod.getType();
 
             final List<FacetedMethodParameter> parameters = facetedMethod.getParameters();
-            parameterNames = immutableList(Iterables.transform(parameters, FacetedMethodParameter.Functions.GET_NAME));
+            parameterNames = immutableList(Iterables.transform(parameters, new Function<FacetedMethodParameter, String>() {
+                @Override public String apply(final FacetedMethodParameter input) {
+                    final NamedFacet namedFacet = input.getFacet(NamedFacet.class);
+                    return namedFacet.value(targetAdapter);
+                }
+            }));
             parameterTypes = immutableList(Iterables.transform(parameters, FacetedMethodParameter.Functions.GET_TYPE));
         } else {
             parameterNames = null;

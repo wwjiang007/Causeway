@@ -37,9 +37,8 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Fragment;
 import org.apache.wicket.model.Model;
-import org.apache.isis.applib.annotation.ActionSemantics;
+
 import org.apache.isis.applib.annotation.NatureOfService;
-import org.apache.isis.applib.annotation.SemanticsOf;
 import org.apache.isis.applib.filter.Filters;
 import org.apache.isis.applib.services.i18n.TranslationService;
 import org.apache.isis.core.metamodel.adapter.ObjectAdapter;
@@ -58,7 +57,6 @@ import org.apache.isis.core.runtime.system.session.IsisSessionFactoryBuilder;
 import org.apache.isis.viewer.wicket.model.models.EntityModel;
 import org.apache.isis.viewer.wicket.model.models.ServiceActionsModel;
 import org.apache.isis.viewer.wicket.ui.components.actionmenu.CssClassFaBehavior;
-import org.apache.isis.viewer.wicket.ui.panels.PanelUtil;
 import org.apache.isis.viewer.wicket.ui.util.CssClassAppender;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.components.TooltipBehavior;
@@ -277,7 +275,7 @@ public final class ServiceActionUtil {
             final MemberOrderFacet memberOrderFacet = objectAction.getFacet(MemberOrderFacet.class);
             String serviceName = memberOrderFacet != null? memberOrderFacet.name(): null;
             if(Strings.isNullOrEmpty(serviceName)){
-                serviceName = serviceSpec.getFacet(NamedFacet.class).value();
+                serviceName = serviceSpec.getFacet(NamedFacet.class).value(serviceAdapter);
             }
             final EntityModel serviceModel = new EntityModel(serviceAdapter);
             serviceActions.add(new ServiceAndAction(serviceName, serviceModel, objectAction));
@@ -295,7 +293,7 @@ public final class ServiceActionUtil {
         // first, order as defined in isis.properties
         for (ObjectAdapter serviceAdapter : serviceAdapters) {
             final ObjectSpecification serviceSpec = serviceAdapter.getSpecification();
-            String serviceName = serviceSpec.getFacet(NamedFacet.class).value();
+            String serviceName = serviceSpec.getFacet(NamedFacet.class).value(serviceAdapter);
             serviceNameOrder.add(serviceName);
         }
         // then, any other services (eg due to misspellings, at the end)

@@ -19,6 +19,7 @@
 
 package org.apache.isis.core.metamodel.facets.all.named;
 
+import org.apache.isis.core.metamodel.adapter.ObjectAdapter;
 import org.apache.isis.core.metamodel.facets.MultipleValueFacet;
 
 /**
@@ -32,8 +33,9 @@ public interface NamedFacet extends MultipleValueFacet {
 
     /**
      * @return The name to use as a label for a collection, a property or a parameter
+     * @param owningAdapter
      */
-    String value();
+    String value(final ObjectAdapter owningAdapter);
 
     /**
      * @return A flag indicating whether the label should be show as is, or should be HTML escaped
