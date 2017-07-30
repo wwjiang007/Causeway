@@ -204,22 +204,22 @@ public class ReferencePanel extends ScalarPanelSelect2Abstract implements PanelW
     // //////////////////////////////////////
 
     @Override
-    protected void onInitializeWhenEnabled() {
-        super.onInitializeWhenEnabled();
+    protected void onBeforeRenderWhenEnabled() {
+        super.onBeforeRenderWhenEnabled();
         entityLink.setEnabled(true);
         syncWithInput();
     }
 
     @Override
-    protected void onInitializeWhenViewMode() {
-        super.onInitializeWhenViewMode();
+    protected void onBeforeRenderWhenViewMode() {
+        super.onBeforeRenderWhenViewMode();
         entityLink.setEnabled(false);
         syncWithInput();
     }
 
     @Override
-    protected void onInitializeWhenDisabled(final String disableReason) {
-        super.onInitializeWhenDisabled(disableReason);
+    protected void onBeforeRenderWhenDisabled(final String disableReason) {
+        super.onBeforeRenderWhenDisabled(disableReason);
         syncWithInput();
         final EntityModel entityLinkModel = (EntityModel) entityLink.getModel();
         entityLinkModel.toViewMode();

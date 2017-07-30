@@ -197,20 +197,20 @@ public class BooleanPanel extends ScalarPanelAbstract2 {
     }
 
     @Override
-    protected void onInitializeWhenEnabled() {
-        super.onInitializeWhenEnabled();
+    protected void onBeforeRenderWhenEnabled() {
+        super.onBeforeRenderWhenEnabled();
         checkBox.setEnabled(true);
     }
 
     @Override
-    protected void onInitializeWhenViewMode() {
-        super.onInitializeWhenViewMode();
+    protected void onBeforeRenderWhenViewMode() {
+        super.onBeforeRenderWhenViewMode();
         checkBox.setEnabled(false);
     }
 
     @Override
-    protected void onInitializeWhenDisabled(final String disableReason) {
-        super.onInitializeWhenDisabled(disableReason);
+    protected void onBeforeRenderWhenDisabled(final String disableReason) {
+        super.onBeforeRenderWhenDisabled(disableReason);
         checkBox.setEnabled(false);
     }
 

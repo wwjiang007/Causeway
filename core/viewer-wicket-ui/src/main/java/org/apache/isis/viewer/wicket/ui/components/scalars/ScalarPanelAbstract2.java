@@ -164,10 +164,15 @@ public abstract class ScalarPanelAbstract2 extends PanelAbstract<ScalarModel> im
     protected void onInitialize() {
         super.onInitialize();
 
+    }
+
+    @Override
+    protected void onBeforeRender() {
+        super.onBeforeRender();
+
         buildGuiAndCallHooks();
 
         setOutputMarkupId(true);
-
     }
 
     private void buildGuiAndCallHooks() {
@@ -190,12 +195,12 @@ public abstract class ScalarPanelAbstract2 extends PanelAbstract<ScalarModel> im
         final String disableReasonIfAny = scalarModel.whetherDisabled(getRendering().getWhere());
 
         if (scalarModel.isViewMode()) {
-            onInitializeWhenViewMode();
+            onBeforeRenderWhenViewMode();
         } else {
             if (disableReasonIfAny != null) {
-                onInitializeWhenDisabled(disableReasonIfAny);
+                onBeforeRenderWhenDisabled(disableReasonIfAny);
             } else {
-                onInitializeWhenEnabled();
+                onBeforeRenderWhenEnabled();
             }
         }
     }
@@ -292,9 +297,9 @@ public abstract class ScalarPanelAbstract2 extends PanelAbstract<ScalarModel> im
                     }
 
                     // don't render as an action
-                    linkAndLabels = Lists.newArrayList(linkAndLabels);
-                    linkAndLabels.remove(linkAndLabelAsIfEdit);
-                }
+                linkAndLabels = Lists.newArrayList(linkAndLabels);
+                linkAndLabels.remove(linkAndLabelAsIfEdit);
+            }
             }
 
             if(componentToHideIfAny != null) {
@@ -343,19 +348,19 @@ public abstract class ScalarPanelAbstract2 extends PanelAbstract<ScalarModel> im
     /**
      * Optional hook.
      */
-    protected void onInitializeWhenViewMode() {
+    protected void onBeforeRenderWhenViewMode() {
     }
 
     /**
      * Optional hook.
      */
-    protected void onInitializeWhenDisabled(final String disableReason) {
+    protected void onBeforeRenderWhenDisabled(final String disableReason) {
     }
 
     /**
      * Optional hook.
      */
-    protected void onInitializeWhenEnabled() {
+    protected void onBeforeRenderWhenEnabled() {
     }
 
 
