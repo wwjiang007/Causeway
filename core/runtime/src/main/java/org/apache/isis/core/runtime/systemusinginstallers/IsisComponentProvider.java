@@ -25,6 +25,19 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Nullable;
+<<<<<<< dev/2.0.0-M2-cherrypicked
+=======
+import javax.jdo.annotations.PersistenceCapable;
+
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
+import com.google.common.collect.FluentIterable;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+
+import org.reflections.Reflections;
+>>>>>>> e20eec9 ISIS-1728: uses typesafe queries for helloworld
 
 import org.apache.isis.applib.AppManifest;
 import org.apache.isis.applib.annotation.DomainObject;
