@@ -48,7 +48,7 @@ public interface IsisContext {
 				()->new IllegalStateException(
 						"internal error: should have been populated by IsisSessionFactoryBuilder") );
 	}
-	
+
 	/**
 	 * 
 	 * @return Isis's default class loader
@@ -78,5 +78,6 @@ public interface IsisContext {
     public static void testReset() {
     	clear();
     }
+
 
 }
