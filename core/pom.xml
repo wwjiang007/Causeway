@@ -29,7 +29,7 @@
 
     <groupId>org.apache.isis.core</groupId>
     <artifactId>isis</artifactId>
-    <version>2.0.0-M1-SNAPSHOT</version>
+    <version>2.0.0-M2-SNAPSHOT</version>
     
     <packaging>pom</packaging>
 
@@ -50,7 +50,7 @@
     </prerequisites>
 
     <properties>
-    	<core-version>2.0.0-M1-SNAPSHOT</core-version>
+    	<core-version>2.0.0-M2-SNAPSHOT</core-version>
         <jar-plugin.automaticModuleName>org.apache.isis.core</jar-plugin.automaticModuleName>
         <git-plugin.propertiesDir>org/apache/isis/core</git-plugin.propertiesDir>
 
@@ -90,10 +90,10 @@
         <!-- Datanucleus Objectstore -->
         <jdo-api.version>3.2.0-m7</jdo-api.version>
 
-        <datanucleus-core.version>5.1.2</datanucleus-core.version>
-        <datanucleus-api-jdo.version>5.1.2</datanucleus-api-jdo.version>
+        <datanucleus-core.version>5.1.5</datanucleus-core.version>
+        <datanucleus-api-jdo.version>5.1.4</datanucleus-api-jdo.version>
         <datanucleus-jdo-query.version>5.0.2</datanucleus-jdo-query.version>
-        <datanucleus-rdbms.version>5.1.2</datanucleus-rdbms.version>
+        <datanucleus-rdbms.version>5.1.5</datanucleus-rdbms.version>
         <datanucleus-jodatime.version>5.1.0-release</datanucleus-jodatime.version>
 	<!--
 	    ISIS-1288: seen integration tests to fail;
