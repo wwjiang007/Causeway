@@ -137,7 +137,7 @@ public abstract class IsisComponentProvider {
         final Discovery discovery = _Reflect.discover(moduleAndFrameworkPackages);
 
         final Set<Class<?>> domainServiceTypes = discovery.getTypesAnnotatedWith(DomainService.class);
-        final Set<Class<?>> persistenceCapableTypes = discovery.findPersistenceCapableTypes();
+        final Set<Class<?>> persistenceCapableTypes = PersistenceCapableTypeFinder.find(discovery);
         final Set<Class<? extends FixtureScript>> fixtureScriptTypes = discovery.getSubTypesOf(FixtureScript.class);
 
         final Set<Class<?>> mixinTypes = Sets.newHashSet();

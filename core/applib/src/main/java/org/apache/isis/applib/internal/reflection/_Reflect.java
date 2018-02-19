@@ -23,10 +23,9 @@ import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.isis.applib.internal.context._Context;
 import org.reflections.scanners.SubTypesScanner;
 import org.reflections.util.ClasspathHelper;
-
-import org.apache.isis.applib.internal.context._Context;
 
 /**
  * <h1>- internal use only -</h1>
@@ -55,8 +54,6 @@ public final class _Reflect {
 		
 		//TODO missing java-doc
 		public <T> Set<Class<? extends T>> getSubTypesOf(Class<T> type);
-
-		public Set<Class<?>> findPersistenceCapableTypes();
 
 	}
 

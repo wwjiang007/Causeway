@@ -8,15 +8,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.jdo.annotations.PersistenceCapable;
 import javax.validation.constraints.NotNull;
-
-import com.google.common.collect.Sets;
-
-import org.reflections.Reflections;
 
 import org.apache.isis.applib.internal.base._NullSafe;
 import org.apache.isis.applib.internal.reflection._Reflect.Discovery;
+import org.reflections.Reflections;
 
 /**
  * 
@@ -82,25 +78,6 @@ class _Reflect_Discovery implements _Reflect.Discovery {
 		// ensure non-null elements
 		return _NullSafe.stream(reflections.getSubTypesOf(type))
 				.filter(_NullSafe::isPresent);
-	}
-
-	public Set<Class<?>> findPersistenceCapableTypes() {
-
-		Set<Class<?>> pcSet = Sets.newLinkedHashSet();
-
-		Set<Class<?>> persistenceCapables = reflections.getTypesAnnotatedWith(PersistenceCapable.class);
-		persistenceCapables.stream()
-				.filter(x -> !x.isAnnotation())
-				.forEach(pcSet::add);
-
-		Stream<Class<? extends Annotation>> pcMetaAnnotStream =
-				(Stream)persistenceCapables.stream().filter(x -> x.isAnnotation());
-		pcMetaAnnotStream.map(metaAnnot -> reflections.getTypesAnnotatedWith(metaAnnot).stream())
-				.flatMap(x -> x)
-				.filter(x -> !x.isAnnotation())
-				.forEach(pcSet::add);
-
-		return pcSet;
 	}
 
 	
