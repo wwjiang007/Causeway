@@ -30,6 +30,7 @@ import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
+import org.apache.isis.applib.internal.context._Context;
 import org.apache.isis.core.commons.authentication.AuthenticationSession;
 import org.apache.isis.core.commons.config.IsisConfiguration;
 import org.apache.isis.core.commons.config.IsisConfigurationDefault;
@@ -334,7 +335,7 @@ public class IsisWicketApplication
         try {
             super.init();
             
-            IsisContext.setClassLoader(this.getClass().getClassLoader());
+            _Context.putSingleton(ClassLoader.class, this.getClass().getClassLoader());
 
             futures = startBackgroundInitializationThreads();
 
