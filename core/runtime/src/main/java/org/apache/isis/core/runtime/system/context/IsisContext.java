@@ -65,6 +65,7 @@ public interface IsisContext {
      */
     public static void clear() {
     	_Context.clear();
+    	resetLogging();
     }
     
     // -- DEPRECATIONS
@@ -79,5 +80,19 @@ public interface IsisContext {
     	clear();
     }
 
+	// -- HELPER
+
+	/**
+	 * TODO [andi-huber] not sure if required, initial idea was to force log4j
+	 * re-configuration on an undeploy/deploy cycle
+	 */
+	static void resetLogging() {
+		try {
+			org.apache.log4j.BasicConfigurator.resetConfiguration();
+			org.apache.log4j.Logger.getRootLogger().removeAllAppenders();
+		} catch (Exception e) {
+			// at least we tried
+		}
+	}
 
 }

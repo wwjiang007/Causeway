@@ -32,6 +32,7 @@ import org.apache.isis.core.metamodel.spec.ObjectSpecification;
 import org.apache.isis.core.metamodel.specloader.SpecificationLoader;
 import org.apache.isis.core.runtime.system.context.IsisContext;
 import org.apache.isis.objectstore.jdo.datanucleus.CreateSchemaObjectFromClassMetadata;
+import org.apache.isis.objectstore.jdo.datanucleus.DataNucleusLifeCycleHelper;
 import org.apache.isis.objectstore.jdo.datanucleus.DataNucleusPropertiesAware;
 import org.apache.isis.objectstore.jdo.metamodel.facets.object.query.JdoNamedQuery;
 import org.apache.isis.objectstore.jdo.metamodel.facets.object.query.JdoQueryFacet;
@@ -108,6 +109,20 @@ public class DataNucleusApplicationComponents implements ApplicationScopedCompon
         persistenceManagerFactory = createPmfAndSchemaIfRequired(persistableClassNameSet, datanucleusProps);
 
         namedQueryByName = catalogNamedQueries(persistableClassNameSet);
+    }
+    
+    /** 
+     * Marks the end of DataNucleus' life-cycle. Purges any state associated with DN. 
+     * Subsequent calls have no effect.  
+     * 
+     * @since 2.0.0
+     */
+    public void shutdown() {
+    	instance = null;
+    	if(persistenceManagerFactory != null) {
+    		DataNucleusLifeCycleHelper.cleanUp(persistenceManagerFactory);
+    		persistenceManagerFactory = null;
+    	}
     }
 
     private static boolean isSchemaAwareStoreManager(Map<String,String> datanucleusProps) {
