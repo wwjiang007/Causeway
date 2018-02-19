@@ -144,16 +144,12 @@ public abstract class IsisComponentProvider {
         mixinTypes.addAll(discovery.getTypesAnnotatedWith(Mixin.class));
 
         final Set<Class<?>> domainObjectTypes = discovery.getTypesAnnotatedWith(DomainObject.class);
-        mixinTypes.addAll(
-                domainObjectTypes.stream().filter(input -> {
-                    if (input == null) {
-                        return false;
-                    }
-                    final DomainObject annotation = input.getAnnotation(DomainObject.class);
-                    return annotation.nature() == Nature.MIXIN;
-                }).collect(Collectors.toList())
-        );
-        
+        domainObjectTypes.stream()
+        .filter(input -> {
+            final DomainObject annotation = input.getAnnotation(DomainObject.class);
+            return annotation.nature() == Nature.MIXIN;
+        })
+        .forEach(mixinTypes::add);
         
         // add in any explicitly registered services...
         domainServiceTypes.addAll(appManifest.getAdditionalServices());
