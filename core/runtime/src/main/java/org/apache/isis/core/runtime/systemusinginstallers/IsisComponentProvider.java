@@ -19,16 +19,13 @@
 
 package org.apache.isis.core.runtime.systemusinginstallers;
 
-import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
-import javax.jdo.annotations.PersistenceCapable;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -36,8 +33,6 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
-import org.reflections.Reflections;
 
 import org.apache.isis.applib.AppManifest;
 import org.apache.isis.applib.annotation.DomainObject;

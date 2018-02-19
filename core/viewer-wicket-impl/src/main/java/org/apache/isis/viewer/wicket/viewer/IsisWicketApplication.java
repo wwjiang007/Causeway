@@ -859,7 +859,7 @@ public class IsisWicketApplication
             }
             getServletContext().setAttribute(WebAppConstants.ISIS_SESSION_FACTORY, null);
             super.onDestroy();
-            IsisContext.destroy();
+            IsisContext.clear();
         } catch(final RuntimeException ex) {
             // symmetry with #init()
             LOG.error("Failed to destroy", ex);
