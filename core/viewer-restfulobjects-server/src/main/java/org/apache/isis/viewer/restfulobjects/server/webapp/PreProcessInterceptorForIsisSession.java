@@ -21,19 +21,23 @@ package org.apache.isis.viewer.restfulobjects.server.webapp;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.ext.Provider;
 
-import org.jboss.resteasy.annotations.interception.ServerInterceptor;
+//deprecated import org.jboss.resteasy.annotations.interception.ServerInterceptor;
 import org.jboss.resteasy.core.ResourceMethodInvoker;
 import org.jboss.resteasy.core.ServerResponse;
 import org.jboss.resteasy.spi.Failure;
 import org.jboss.resteasy.spi.HttpRequest;
-import org.jboss.resteasy.spi.interception.PreProcessInterceptor;
+//deprecated import org.jboss.resteasy.spi.interception.PreProcessInterceptor;
+
+//FIXME [ahuber] what to do?
 
 @Provider
-@ServerInterceptor
-public class PreProcessInterceptorForIsisSession implements PreProcessInterceptor {
+//deprecated @ServerInterceptor
+public class PreProcessInterceptorForIsisSession //deprecated implements PreProcessInterceptor 
+{
 
+	/* deprecated
     @Override
     public ServerResponse preProcess(HttpRequest httpRequest, ResourceMethodInvoker resourceMethodInvoker) throws Failure, WebApplicationException {
         return null;
-    }
+    }*/
 }
